@@ -18,12 +18,21 @@
     <ClInclude Include="RML.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\tuple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
