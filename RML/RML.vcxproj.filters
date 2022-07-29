@@ -27,6 +27,9 @@
     <ClInclude Include="src\constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RML.cpp">

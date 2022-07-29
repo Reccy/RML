@@ -3,7 +3,7 @@
 
 namespace RML
 {
-	TEST(CppRayTracerChallenge_Core_Math_Vector, construct_default)
+	TEST(RML_Vector, construct_default)
 	{
 		Vector vector = Vector();
 
@@ -12,7 +12,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, construct_2d)
+	TEST(RML_Vector, construct_2d)
 	{
 		Vector vector = Vector(1, 2);
 
@@ -21,7 +21,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, construct_from_tuple)
+	TEST(RML_Vector, construct_from_tuple)
 	{
 		Tuple<double> tuple(1, 2, 3, 4);
 		Vector vector(tuple);
@@ -31,7 +31,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, zero_will_build_zero_vector)
+	TEST(RML_Vector, zero_will_build_zero_vector)
 	{
 		Vector vector = Vector::zero();
 		Vector expectedResult(0, 0, 0);
@@ -39,7 +39,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, up_will_build_vector_pointing_up)
+	TEST(RML_Vector, up_will_build_vector_pointing_up)
 	{
 		Vector vector = Vector::up();
 		Vector expectedResult(0, 1, 0);
@@ -47,7 +47,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, right_will_build_vector_pointing_right)
+	TEST(RML_Vector, right_will_build_vector_pointing_right)
 	{
 		Vector vector = Vector::right();
 		Vector expectedResult(1, 0, 0);
@@ -55,7 +55,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, forward_will_build_vector_pointing_forward)
+	TEST(RML_Vector, forward_will_build_vector_pointing_forward)
 	{
 		Vector vector = Vector::forward();
 		Vector expectedResult(0, 0, 1);
@@ -63,7 +63,7 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, x)
+	TEST(RML_Vector, x)
 	{
 		Vector vectorA(1, 2, 3);
 
@@ -72,7 +72,7 @@ namespace RML
 		EXPECT_EQ(vectorA.x(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, y)
+	TEST(RML_Vector, y)
 	{
 		Vector vectorA(1, 2, 3);
 
@@ -81,7 +81,7 @@ namespace RML
 		EXPECT_EQ(vectorA.y(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, z)
+	TEST(RML_Vector, z)
 	{
 		Vector vectorA(1, 2, 3);
 
@@ -90,7 +90,7 @@ namespace RML
 		EXPECT_EQ(vectorA.z(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, w_is_0)
+	TEST(RML_Vector, w_is_0)
 	{
 		Vector vectorA(1, 2, 3);
 
@@ -99,7 +99,7 @@ namespace RML
 		EXPECT_EQ(vectorA.w(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, cross_product_a_b)
+	TEST(RML_Vector, cross_product_a_b)
 	{
 		Vector vectorA(1, 2, 3);
 		Vector vectorB(2, 3, 4);
@@ -109,7 +109,7 @@ namespace RML
 		EXPECT_EQ(Vector::cross(vectorA, vectorB), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, cross_product_b_a)
+	TEST(RML_Vector, cross_product_b_a)
 	{
 		Vector vectorA(1, 2, 3);
 		Vector vectorB(2, 3, 4);
@@ -119,7 +119,7 @@ namespace RML
 		EXPECT_EQ(Vector::cross(vectorB, vectorA), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, dot_product)
+	TEST(RML_Vector, dot_product)
 	{
 		Vector vectorA(1, 2, 3);
 		Vector vectorB(2, 3, 4);
@@ -130,7 +130,7 @@ namespace RML
 		EXPECT_EQ(actual, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, vector_reflection_at_45_degrees)
+	TEST(RML_Vector, vector_reflection_at_45_degrees)
 	{
 		Vector vector(1, -1, 0);
 		Vector normal(0, 1, 0);
@@ -141,7 +141,7 @@ namespace RML
 		EXPECT_EQ(reflected, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, vector_reflection_off_slanted_surface)
+	TEST(RML_Vector, vector_reflection_off_slanted_surface)
 	{
 		Vector vector(0, -1, 0);
 		Vector normal(sqrt(2) / 2, sqrt(2) / 2, 0);
@@ -152,7 +152,7 @@ namespace RML
 		EXPECT_EQ(reflected, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, magnitude_of_vector_1_0_0)
+	TEST(RML_Vector, magnitude_of_vector_1_0_0)
 	{
 		Vector vector(1, 0, 0);
 		double expectedResult = 1;
@@ -160,7 +160,7 @@ namespace RML
 		EXPECT_EQ(vector.magnitude(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, magnitude_of_vector_0_1_0)
+	TEST(RML_Vector, magnitude_of_vector_0_1_0)
 	{
 		Vector vector(0, 1, 0);
 		double expectedResult = 1;
@@ -168,7 +168,7 @@ namespace RML
 		EXPECT_EQ(vector.magnitude(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, magnitude_of_vector_0_0_1)
+	TEST(RML_Vector, magnitude_of_vector_0_0_1)
 	{
 		Vector vector(0, 0, 1);
 		double expectedResult = 1;
@@ -176,7 +176,7 @@ namespace RML
 		EXPECT_EQ(vector.magnitude(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, magnitude_of_vector_1_2_3)
+	TEST(RML_Vector, magnitude_of_vector_1_2_3)
 	{
 		Vector vector(1, 2, 3);
 		double expectedResult = 3.7416573867739413; // sqrt(14)
@@ -184,7 +184,7 @@ namespace RML
 		EXPECT_EQ(vector.magnitude(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, magnitude_of_vector_neg1_neg2_neg3)
+	TEST(RML_Vector, magnitude_of_vector_neg1_neg2_neg3)
 	{
 		Vector vector(-1, -2, -3);
 		double expectedResult = 3.7416573867739413; // sqrt(14)
@@ -192,7 +192,7 @@ namespace RML
 		EXPECT_EQ(vector.magnitude(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, normalization_of_vector_4_0_0)
+	TEST(RML_Vector, normalization_of_vector_4_0_0)
 	{
 		Vector vector(4, 0, 0);
 		Vector expectedResult(1, 0, 0);
@@ -200,7 +200,7 @@ namespace RML
 		EXPECT_EQ(vector.normalize(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, normalization_of_vector_1_2_3)
+	TEST(RML_Vector, normalization_of_vector_1_2_3)
 	{
 		Vector vector(1, 2, 3);
 		Vector expectedResult(0.267261f, 0.534522f, 0.801784f);
@@ -208,7 +208,7 @@ namespace RML
 		EXPECT_EQ(vector.normalize(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, magnitude_of_normalized_vector)
+	TEST(RML_Vector, magnitude_of_normalized_vector)
 	{
 		Vector vector(1, 2, 3);
 		double expectedResult = 1.0;
@@ -218,35 +218,35 @@ namespace RML
 		EXPECT_EQ(vector.magnitude(), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, equality_true)
+	TEST(RML_Vector, equality_true)
 	{
 		Vector vector(4.3, -4.2, 3.1);
 		Vector expectedResult(4.3, -4.2, 3.1);
 		EXPECT_TRUE(vector == expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, equality_false)
+	TEST(RML_Vector, equality_false)
 	{
 		Vector vector(4.3, -4.2, 3.1);
 		Vector expectedResult(1.0, 2.0, -9.3);
 		EXPECT_FALSE(vector == expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, inequality_true)
+	TEST(RML_Vector, inequality_true)
 	{
 		Vector vector(4.3, -4.2, 3.1);
 		Vector expectedResult(1.0, 2.0, -9.3);
 		EXPECT_TRUE(vector != expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, inequality_false)
+	TEST(RML_Vector, inequality_false)
 	{
 		Vector vector(4.3, -4.2, 3.1);
 		Vector expectedResult(4.3, -4.2, 3.1);
 		EXPECT_FALSE(vector != expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, addition_with_vectors)
+	TEST(RML_Vector, addition_with_vectors)
 	{
 		Vector vectorA(3, -2, 5);
 		Vector vectorB(-2, 3, 1);
@@ -255,7 +255,7 @@ namespace RML
 		EXPECT_EQ((vectorA + vectorB), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, subtracting_two_vectors_is_a_vector)
+	TEST(RML_Vector, subtracting_two_vectors_is_a_vector)
 	{
 		Vector vectorA(3, 2, 1);
 		Vector vectorB(5, 6, 7);
@@ -264,7 +264,7 @@ namespace RML
 		EXPECT_EQ((vectorA - vectorB), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, subtracting_a_vector_from_zero_vector_results_in_negation)
+	TEST(RML_Vector, subtracting_a_vector_from_zero_vector_results_in_negation)
 	{
 		Vector zero = Vector::zero();
 		Vector vector(1, -2, 3);
@@ -273,7 +273,7 @@ namespace RML
 		EXPECT_EQ((zero - vector), expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, unary_negation_will_negate_vector)
+	TEST(RML_Vector, unary_negation_will_negate_vector)
 	{
 		Vector vector(1, -2, 3);
 		Vector expectedResult(-1, 2, -3);
@@ -281,7 +281,7 @@ namespace RML
 		EXPECT_EQ(-vector, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, multiplication_by_scalar)
+	TEST(RML_Vector, multiplication_by_scalar)
 	{
 		Vector tuple(1, -2, 3);
 		Vector expectedResult(3.5, -7, 10.5);
@@ -289,7 +289,7 @@ namespace RML
 		EXPECT_EQ(tuple * 3.5, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, multiplication_by_fraction)
+	TEST(RML_Vector, multiplication_by_fraction)
 	{
 		Vector tuple(1, -2, 3);
 		Vector expectedResult(0.5, -1, 1.5);
@@ -297,7 +297,7 @@ namespace RML
 		EXPECT_EQ(tuple * 0.5, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, dividing_by_scalar)
+	TEST(RML_Vector, dividing_by_scalar)
 	{
 		Vector tuple(1, -2, 3);
 		Vector expectedResult(0.5, -1, 1.5);
@@ -305,7 +305,7 @@ namespace RML
 		EXPECT_EQ(tuple / 2, expectedResult);
 	}
 
-	TEST(CppRayTracerChallenge_Core_Math_Vector, ostream_will_show_x_y_z_w_components)
+	TEST(RML_Vector, ostream_will_show_x_y_z_w_components)
 	{
 		Vector vector(4.3, -4.2, 3.1);
 		std::stringstream ss;
