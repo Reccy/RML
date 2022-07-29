@@ -2,13 +2,13 @@
 
 namespace RML
 {
-	Vector::Vector() : Tuple(0, 0, 0, 0) {};
+	Vector::Vector() : Tuple4(0, 0, 0, 0) {};
 
-	Vector::Vector(const Tuple tuple) : Tuple(tuple.x(), tuple.y(), tuple.z(), 0) {};
+	Vector::Vector(const Tuple4 tuple) : Tuple4(tuple.x(), tuple.y(), tuple.z(), 0) {};
 
-	Vector::Vector(const double x, const double y, const double z) : Tuple(x, y, z, 0) {};
+	Vector::Vector(const double x, const double y, const double z) : Tuple4(x, y, z, 0) {};
 
-	Vector::Vector(const double x, const double y) : Tuple(x, y, 0, 0) {};
+	Vector::Vector(const double x, const double y) : Tuple4(x, y, 0, 0) {};
 
 	Vector Vector::zero()
 	{

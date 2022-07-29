@@ -2,7 +2,7 @@
 
 #include <array>
 #include <sstream>
-#include "tuple.h"
+#include "tuple4.h"
 
 namespace RML
 {
@@ -253,7 +253,7 @@ namespace RML
 			return result;
 		};
 
-		Tuple<T> operator*(const Tuple<T>& tuple) const
+		Tuple4<T> operator*(const Tuple4<T>& tuple) const
 		{
 			Matrix<T, 4, 1> matrix({
 				tuple.x(),
@@ -264,7 +264,7 @@ namespace RML
 
 			matrix = *this * matrix;
 
-			Tuple result(
+			Tuple4 result(
 				matrix(0,0),
 				matrix(0,1),
 				matrix(0,2),

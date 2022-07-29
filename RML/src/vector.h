@@ -1,13 +1,13 @@
 #pragma once
 
-#include "tuple.h"
+#include "tuple4.h"
 
 namespace RML
 {
 	/// <summary>
 	/// A Vector in Euclidean Space
 	/// </summary>
-	class Vector : public Tuple<double> {
+	class Vector : public Tuple4<double> {
 	public:
 		/// <summary>
 		/// Constructs a Vector with components 0, 0, 0
@@ -20,7 +20,7 @@ namespace RML
 		/// W component is set to 0.
 		/// </summary>
 		/// <param name="tuple">The tuple to convert to a Vector</param>
-		Vector(const Tuple tuple);
+		Vector(const Tuple4 tuple);
 
 		/// <summary>
 		/// Constructs a Vector with x, y and z components

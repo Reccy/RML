@@ -277,9 +277,9 @@ namespace RML
 			0, 0, 0, 1
 			});
 
-		Tuple<float> tuple(1, 2, 3, 1);
+		Tuple4<float> tuple(1, 2, 3, 1);
 
-		Tuple<float> expectedResult(18, 24, 33, 1);
+		Tuple4<float> expectedResult(18, 24, 33, 1);
 
 		EXPECT_EQ(matrix * tuple, expectedResult);
 	}

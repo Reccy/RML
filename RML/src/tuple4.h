@@ -4,15 +4,14 @@
 #include <type_traits>
 #include "constants.h"
 
-namespace RML {
+namespace RML
+{
 	/// <summary>
 	/// A Tuple with x, y, z and w components
 	/// </summary>
 	template<typename T>
-	class Tuple {
+	class Tuple4 {
 	public:
-		Tuple() = delete;
-
 		/// <summary>
 		/// Creates a tuple with x, y, z and w components
 		/// </summary>
@@ -20,7 +19,7 @@ namespace RML {
 		/// <param name="y">Y component</param>
 		/// <param name="z">Z component</param>
 		/// <param name="w">W component. 1 is a point, 2 is a tuple</param>
-		Tuple(const T x, const T y, const T z, const T w) : m_x(x), m_y(y), m_z(z), m_w(w) {}
+		Tuple4(const T x, const T y, const T z, const T w) : m_x(x), m_y(y), m_z(z), m_w(w) {}
 
 		/// <summary>
 		/// Returns a const X component
@@ -45,7 +44,7 @@ namespace RML {
 		{
 			return this->m_z;
 		};
-		
+
 		/// <summary>
 		/// Returns a const W component
 		/// </summary>
@@ -54,7 +53,7 @@ namespace RML {
 			return this->m_w;
 		};
 
-		bool operator==(const Tuple& other) const
+		bool operator==(const Tuple4& other) const
 		{
 			return abs(m_x - other.m_x) < EPSILON &&
 				abs(m_y - other.m_y) < EPSILON &&
@@ -62,19 +61,19 @@ namespace RML {
 				abs(m_w - other.m_w) < EPSILON;
 		};
 
-		bool operator!=(const Tuple& other) const
+		bool operator!=(const Tuple4& other) const
 		{
 			return !(*this == other);
 		};
 
-		Tuple operator+(const Tuple& other) const
+		Tuple4 operator+(const Tuple4& other) const
 		{
-			return Tuple(this->m_x + other.m_x, this->m_y + other.m_y, this->m_z + other.m_z, this->m_w + other.m_w);
+			return Tuple4(this->m_x + other.m_x, this->m_y + other.m_y, this->m_z + other.m_z, this->m_w + other.m_w);
 		};
 
-		Tuple& operator+=(const Tuple& other)
+		Tuple4& operator+=(const Tuple4& other)
 		{
-			Tuple res = *this + other;
+			Tuple4 res = *this + other;
 			this->m_x = res.m_x;
 			this->m_y = res.m_y;
 			this->m_z = res.m_z;
@@ -82,14 +81,14 @@ namespace RML {
 			return *this;
 		}
 
-		Tuple operator-(const Tuple& other) const
+		Tuple4 operator-(const Tuple4& other) const
 		{
-			return Tuple(this->m_x - other.m_x, this->m_y - other.m_y, this->m_z - other.m_z, this->m_w - other.m_w);
+			return Tuple4(this->m_x - other.m_x, this->m_y - other.m_y, this->m_z - other.m_z, this->m_w - other.m_w);
 		};
 
-		Tuple& operator-=(const Tuple& other)
+		Tuple4& operator-=(const Tuple4& other)
 		{
-			Tuple res = *this - other;
+			Tuple4 res = *this - other;
 			this->m_x = res.m_x;
 			this->m_y = res.m_y;
 			this->m_z = res.m_z;
@@ -97,19 +96,19 @@ namespace RML {
 			return *this;
 		}
 
-		Tuple operator-() const
+		Tuple4 operator-() const
 		{
-			return Tuple(0, 0, 0, 0) - *this;
+			return Tuple4(0, 0, 0, 0) - *this;
 		};
 
-		Tuple operator*(const T scalar) const
+		Tuple4 operator*(const T scalar) const
 		{
-			return Tuple(this->m_x * scalar, this->m_y * scalar, this->m_z * scalar, this->m_w * scalar);
+			return Tuple4(this->m_x * scalar, this->m_y * scalar, this->m_z * scalar, this->m_w * scalar);
 		};
 
-		Tuple& operator*=(const T scalar)
+		Tuple4& operator*=(const T scalar)
 		{
-			Tuple res = *this * scalar;
+			Tuple4 res = *this * scalar;
 			this->m_x = res.m_x;
 			this->m_y = res.m_y;
 			this->m_z = res.m_z;
@@ -117,14 +116,14 @@ namespace RML {
 			return *this;
 		}
 
-		Tuple operator/(const T scalar) const
+		Tuple4 operator/(const T scalar) const
 		{
-			return Tuple(this->m_x / scalar, this->m_y / scalar, this->m_z / scalar, this->m_w / scalar);
+			return Tuple4(this->m_x / scalar, this->m_y / scalar, this->m_z / scalar, this->m_w / scalar);
 		};
 
-		Tuple& operator/=(const T scalar)
+		Tuple4& operator/=(const T scalar)
 		{
-			Tuple res = *this / scalar;
+			Tuple4 res = *this / scalar;
 			this->m_x = res.m_x;
 			this->m_y = res.m_y;
 			this->m_z = res.m_z;
@@ -132,7 +131,7 @@ namespace RML {
 			return *this;
 		}
 
-		friend std::ostream& operator<<(std::ostream& os, const Tuple& tuple)
+		friend std::ostream& operator<<(std::ostream& os, const Tuple4& tuple)
 		{
 			os << tuple.x() << ", " << tuple.y() << ", " << tuple.z() << ", " << tuple.w();
 			return os;

@@ -23,7 +23,7 @@ namespace RML
 
 	TEST(RML_Vector, construct_from_tuple)
 	{
-		Tuple<double> tuple(1, 2, 3, 4);
+		Tuple4<double> tuple(1, 2, 3, 4);
 		Vector vector(tuple);
 
 		Vector expectedResult(1, 2, 3);
