@@ -3,6 +3,15 @@
 
 namespace RML
 {
+	TEST(RML_Tuple3, default_constructor)
+	{
+		Tuple3<double> tuple;
+
+		EXPECT_EQ(tuple.x(), 0);
+		EXPECT_EQ(tuple.y(), 0);
+		EXPECT_EQ(tuple.z(), 0);
+	}
+
 	TEST(RML_Tuple3, x)
 	{
 		Tuple3<double> tuple(1.0, 2.0, 3.0);
