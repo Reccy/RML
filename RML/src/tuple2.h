@@ -13,7 +13,12 @@ namespace RML
 	class Tuple2 {
 	public:
 		/// <summary>
-		/// Creates a tuple with x, y, z components
+		/// Creates an empty tuple with x, y components
+		/// </summary>
+		Tuple2() : m_x(0), m_y(0) {}
+
+		/// <summary>
+		/// Creates a tuple with x, y components
 		/// </summary>
 		/// <param name="x">X component</param>
 		/// <param name="y">Y component</param>

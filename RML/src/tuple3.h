@@ -13,6 +13,11 @@ namespace RML
 	class Tuple3 {
 	public:
 		/// <summary>
+		/// Creates an empty tuple with x, y, z components
+		/// </summary>
+		Tuple3() : m_x(0), m_y(0), m_z(0) {}
+
+		/// <summary>
 		/// Creates a tuple with x, y, z components
 		/// </summary>
 		/// <param name="x">X component</param>
