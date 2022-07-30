@@ -5,3 +5,6 @@
 #include "src/tuple4.h"
 #include "src/vector.h"
 #include "src/matrix.h"
+#include "src/transform.h"
+#include "src/trig.h"
+#include "src/point.h"

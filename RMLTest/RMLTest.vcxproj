@@ -45,6 +45,9 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClCompile Include="tests\matrix_test.cpp" />
+    <ClCompile Include="tests\point_test.cpp" />
+    <ClCompile Include="tests\transform_test.cpp" />
+    <ClCompile Include="tests\trig_test.cpp" />
     <ClCompile Include="tests\tuple2_test.cpp" />
     <ClCompile Include="tests\tuple3_test.cpp" />
     <ClCompile Include="tests\tuple4_test.cpp" />

@@ -289,7 +289,8 @@ namespace RML
 
 			for (int i = 0; i < this->m_data.size(); ++i)
 			{
-				if (!abs(this->m_data[i] - abs(other.m_data[i]) < EPSILON)) {
+				if (abs(this->m_data[i] - other.m_data[i]) > EPSILON)
+				{
 					return false;
 				}
 			}

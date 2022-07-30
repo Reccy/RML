@@ -142,6 +142,9 @@
     <ClInclude Include="RML.h" />
     <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\matrix.h" />
+    <ClInclude Include="src\point.h" />
+    <ClInclude Include="src\transform.h" />
+    <ClInclude Include="src\trig.h" />
     <ClInclude Include="src\tuple2.h" />
     <ClInclude Include="src\tuple3.h" />
     <ClInclude Include="src\tuple4.h" />
@@ -149,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RML.cpp" />
+    <ClCompile Include="src\point.cpp" />
+    <ClCompile Include="src\transform.cpp" />
+    <ClCompile Include="src\trig.cpp" />
     <ClCompile Include="src\vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
