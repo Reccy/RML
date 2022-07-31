@@ -43,6 +43,17 @@ namespace RML
 			}
 		};
 
+		// Allow Matrices to be converted between types
+		template<typename U>
+		Matrix(const Matrix<U, ROW, COL>& other)
+			: m_rows(ROW), m_columns(COL), m_data(std::array<T, ROW * COL>())
+		{
+			std::copy_n(other.m_data.begin(), m_rows * m_columns, m_data.begin());
+			m_determinant = (T)other.m_determinant;
+			m_rows = other.m_rows;
+			m_columns = other.m_columns;
+		}
+
 		/// <summary>
 		/// Creates a square Identity Matrix of a specific size
 		/// </summary>

@@ -644,4 +644,32 @@ namespace RML
 
 		EXPECT_EQ(c * b.invert(), a);
 	}
+
+	TEST(RML_Matrix, convert_double_to_float)
+	{
+		Matrix<double, 4, 4> a({
+			1, 2, 3, 4,
+			5, 6, 7, 8,
+			9, 0, 1, 2,
+			3, 4, 5, 6
+		});
+
+		Matrix<float, 4, 4> b = a;
+
+		EXPECT_EQ(a, b);
+	}
+
+	TEST(RML_Matrix, convert_float_to_double)
+	{
+		Matrix<float, 4, 4> a({
+			1, 2, 3, 4,
+			5, 6, 7, 8,
+			9, 0, 1, 2,
+			3, 4, 5, 6
+			});
+
+		Matrix<double, 4, 4> b = a;
+
+		EXPECT_EQ(a, b);
+	}
 }
