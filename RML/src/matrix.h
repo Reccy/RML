@@ -334,6 +334,11 @@ namespace RML
 
 			return os;
 		}
+
+		const T* const data() const
+		{
+			return reinterpret_cast<const T* const>(&m_data);
+		}
 	private:
 		int m_rows, m_columns;
 		mutable T m_determinant = 0;
