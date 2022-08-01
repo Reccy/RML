@@ -6,38 +6,32 @@ namespace RML
 {
 	Transform::Transform() : m_matrix(Matrix<double, 4, 4>::identity()) {};
 
-	const Transform Transform::translate(const double x, const double y, const double z) const
+	Transform& Transform::translate(const double x, const double y, const double z)
 	{
-		Transform copy = Transform(*this);
-
 		Matrix<double, 4, 4> translationMatrix = Matrix<double, 4, 4>::identity();
 		translationMatrix(0, 3) = x;
 		translationMatrix(1, 3) = y;
 		translationMatrix(2, 3) = z;
 
-		copy.m_matrices.push(translationMatrix);
+		m_matrix = translationMatrix * m_matrix;
 
-		return copy;
+		return *this;
 	}
 
-	const Transform Transform::scale(const double x, const double y, const double z) const
+	Transform& Transform::scale(const double x, const double y, const double z)
 	{
-		Transform copy = Transform(*this);
-
 		Matrix<double, 4, 4> scaleMatrix = Matrix<double, 4, 4>::identity();
 		scaleMatrix(0, 0) = x;
 		scaleMatrix(1, 1) = y;
 		scaleMatrix(2, 2) = z;
 
-		copy.m_matrices.push(scaleMatrix);
+		m_matrix = scaleMatrix * m_matrix;
 
-		return copy;
+		return *this;
 	}
 
-	const Transform Transform::rotate(const double x, const double y, const double z) const
+	Transform& Transform::rotate(const double x, const double y, const double z)
 	{
-		Transform copy = Transform(*this);
-
 		const double xRad = Trig::degrees_to_radians(x);
 		const double yRad = Trig::degrees_to_radians(y);
 		const double zRad = Trig::degrees_to_radians(z);
@@ -63,17 +57,13 @@ namespace RML
 			0, 0, 0, 1
 			});
 
-		copy.m_matrices.push(xRotationMatrix);
-		copy.m_matrices.push(yRotationMatrix);
-		copy.m_matrices.push(zRotationMatrix);
+		m_matrix = zRotationMatrix * yRotationMatrix * xRotationMatrix * m_matrix;
 
-		return copy;
+		return *this;
 	}
 
-	const Transform Transform::shear(const double xY, const double xZ, const double yX, const double yZ, const double zX, const double zY) const
+	Transform& Transform::shear(const double xY, const double xZ, const double yX, const double yZ, const double zX, const double zY)
 	{
-		Transform copy = Transform(*this);
-
 		Matrix<double, 4, 4> shearMatrix = Matrix<double, 4, 4>({
 			1, xY, xZ, 0,
 			yX, 1, yZ, 0,
@@ -81,72 +71,41 @@ namespace RML
 			0, 0, 0, 1
 			});
 
-		copy.m_matrices.push(shearMatrix);
+		m_matrix = shearMatrix * m_matrix;
 
-		return copy;
+		return *this;
 	}
 
-	const Transform Transform::transpose() const
+	Transform& Transform::transpose()
 	{
-		Transform copy = Transform(*this);
+		m_matrix = m_matrix.transpose();
 
-		copy.calculateMatrix();
-
-		copy.m_matrix = copy.m_matrix.transpose();
-
-		return copy;
+		return *this;
 	}
 
-	const Transform Transform::invert() const
+	Transform& Transform::invert()
 	{
-		Transform copy = Transform(*this);
-
-		copy.calculateMatrix();
-
-		if (copy.m_matrix.invertible())
+		if (m_matrix.invertible())
 		{
-			copy.m_matrix = copy.m_matrix.invert();
+			m_matrix = m_matrix.invert();
 		}
 
-		return copy;
+		return *this;
 	}
 
 	const Matrix<double, 4, 4> Transform::matrix() const
 	{
-		Transform copy = Transform(*this);
-
-		copy.calculateMatrix();
-
-		return copy.m_matrix;
+		return m_matrix;
 	}
 
 	Tuple4<double> Transform::operator*(const Tuple4<double>& tuple) const
 	{
-		Transform copy = Transform(*this);
-
-		copy.calculateMatrix();
-
-		return copy.m_matrix * tuple;
-	}
-
-	void Transform::calculateMatrix()
-	{
-		while (!m_matrices.empty())
-		{
-			m_matrix = m_matrix * m_matrices.top();
-			m_matrices.pop();
-		}
+		return m_matrix * tuple;
 	}
 
 	bool Transform::operator==(const Transform& other) const
 	{
-		Transform copy = Transform(*this);
-		Transform otherCopy = other;
-
-		copy.calculateMatrix();
-		otherCopy.calculateMatrix();
-
-		return copy.m_matrix == otherCopy.m_matrix;
+		return m_matrix == other.m_matrix;
 	}
 
 	bool Transform::operator!=(const Transform& other) const

@@ -348,50 +348,70 @@ namespace RML
 		EXPECT_EQ(transform * point, expectedResult);
 	}
 
-	TEST(RML_Transform, translate_does_not_mutate_original)
+	TEST(RML_Transform, translate_mutates_original)
 	{
-		Transform original = Transform();
+		Transform transform = Transform();
 
-		Transform mutated = original.translate(1, 2, 3);
+		auto originalMatrix = transform.matrix();
 
-		EXPECT_TRUE(original != mutated);
+		transform.translate(1, 2, 3);
+
+		auto newMatrix = transform.matrix();
+
+		EXPECT_TRUE(originalMatrix != newMatrix);
 	}
 
-	TEST(RML_Transform, scale_does_not_mutate_original)
+	TEST(RML_Transform, scale_mutates_original)
 	{
-		Transform original = Transform();
+		Transform transform = Transform();
 
-		Transform mutated = original.scale(1, 2, 3);
+		auto originalMatrix = transform.matrix();
 
-		EXPECT_TRUE(original != mutated);
+		transform.scale(1, 2, 3);
+
+		auto newMatrix = transform.matrix();
+
+		EXPECT_TRUE(originalMatrix != newMatrix);
 	}
 
-	TEST(RML_Transform, rotate_does_not_mutate_original)
+	TEST(RML_Transform, rotate_mutates_original)
 	{
-		Transform original = Transform();
+		Transform transform = Transform();
 
-		Transform mutated = original.rotate(1, 2, 3);
+		auto originalMatrix = transform.matrix();
 
-		EXPECT_TRUE(original != mutated);
+		transform.rotate(1, 2, 3);
+
+		auto newMatrix = transform.matrix();
+
+		EXPECT_TRUE(originalMatrix != newMatrix);
 	}
 
-	TEST(RML_Transform, shear_does_not_mutate_original)
+	TEST(RML_Transform, shear_mutates_original)
 	{
-		Transform original = Transform();
+		Transform transform = Transform();
 
-		Transform mutated = original.shear(1, 2, 3, 1, 2, 3);
+		auto originalMatrix = transform.matrix();
 
-		EXPECT_TRUE(original != mutated);
+		transform.shear(1, 2, 3, 1, 2, 3);
+
+		auto newMatrix = transform.matrix();
+
+		EXPECT_TRUE(originalMatrix != newMatrix);
 	}
 
-	TEST(RML_Transform, invert_does_not_mutate_original)
+	TEST(RML_Transform, invert_mutates_original)
 	{
-		Transform original = Transform()
+		Transform transform = Transform()
 			.translate(1, 0, 0);
 
-		Transform mutated = original.invert();
+		auto originalMatrix = transform.matrix();
 
-		EXPECT_TRUE(original != mutated);
+		transform.invert();
+
+		auto newMatrix = transform.matrix();
+
+		EXPECT_TRUE(originalMatrix != newMatrix);
 	}
 
 	TEST(RML_Transform, read_matrix)

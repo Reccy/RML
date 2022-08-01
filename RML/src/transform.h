@@ -24,7 +24,7 @@ namespace RML
 		/// <param name="y">Y translation</param>
 		/// <param name="z">Z translation</param>
 		/// <returns>The Transform after being translated</returns>
-		const Transform translate(const double x, const double y, const double z) const;
+		Transform& translate(const double x, const double y, const double z);
 
 		/// <summary>
 		/// Scales the Transform along x, y, z axes
@@ -33,7 +33,7 @@ namespace RML
 		/// <param name="y">Scale along the Y axis</param>
 		/// <param name="z">Scale along the Z axis</param>
 		/// <returns>The Transform after being scaled</returns>
-		const Transform scale(const double x, const double y, const double z) const;
+		Transform& scale(const double x, const double y, const double z);
 
 		/// <summary>
 		/// Rotates the Transform along the x, y and z axes
@@ -42,7 +42,7 @@ namespace RML
 		/// <param name="y">Rotate around the Y axis in degrees</param>
 		/// <param name="z">Rotate around the Z axis in degrees</param>
 		/// <returns>The Transform after being rotated</returns>
-		const Transform rotate(const double x, const double y, const double z) const;
+		Transform& rotate(const double x, const double y, const double z);
 
 		/// <summary>
 		/// Shears the Transform by moving a component in relation to another
@@ -54,19 +54,19 @@ namespace RML
 		/// <param name="zX">Move Z in proportion to X</param>
 		/// <param name="zY">Move Z in proportion to Y</param>
 		/// <returns>The Transform after being sheared</returns>
-		const Transform shear(const double xY, const double xZ, const double yX, const double yZ, const double zX, const double zY) const;
+		Transform& shear(const double xY, const double xZ, const double yX, const double yZ, const double zX, const double zY);
 
 		/// <summary>
 		/// Transposes the matrix
 		/// </summary>
 		/// <returns>The Transform after being transposed</returns>
-		const Transform transpose() const;
+		Transform& transpose();
 
 		/// <summary>
 		/// Inverts the Transform
 		/// </summary>
 		/// <returns>The Transform after being inverted</returns>
-		const Transform invert() const;
+		Transform& invert();
 
 		/// <summary>
 		/// Returns the transform as an actual matrix
@@ -84,10 +84,7 @@ namespace RML
 		bool operator==(const Transform& other) const;
 		bool operator!=(const Transform& other) const;
 	private:
-		std::stack<Matrix<double, 4, 4>> m_matrices;
 		Matrix<double, 4, 4> m_matrix;
-
-		void calculateMatrix();
 	};
 }
 
