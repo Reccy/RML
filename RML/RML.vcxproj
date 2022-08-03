@@ -143,6 +143,7 @@
     <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\matrix.h" />
     <ClInclude Include="src\point.h" />
+    <ClInclude Include="src\quaternion.h" />
     <ClInclude Include="src\transform.h" />
     <ClInclude Include="src\trig.h" />
     <ClInclude Include="src\tuple2.h" />
@@ -153,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="RML.cpp" />
     <ClCompile Include="src\point.cpp" />
+    <ClCompile Include="src\quaternion.cpp" />
     <ClCompile Include="src\transform.cpp" />
     <ClCompile Include="src\trig.cpp" />
     <ClCompile Include="src\vector.cpp" />

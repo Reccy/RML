@@ -46,6 +46,7 @@
   <ItemGroup>
     <ClCompile Include="tests\matrix_test.cpp" />
     <ClCompile Include="tests\point_test.cpp" />
+    <ClCompile Include="tests\quaternion_test.cpp" />
     <ClCompile Include="tests\transform_test.cpp" />
     <ClCompile Include="tests\trig_test.cpp" />
     <ClCompile Include="tests\tuple2_test.cpp" />

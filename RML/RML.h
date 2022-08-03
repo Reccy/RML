@@ -8,3 +8,4 @@
 #include "src/transform.h"
 #include "src/trig.h"
 #include "src/point.h"
+#include "src/quaternion.h"

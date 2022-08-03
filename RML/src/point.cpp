@@ -22,4 +22,10 @@ namespace RML
 	{
 		return Tuple4::operator-();
 	}
+
+	std::ostream& operator<<(std::ostream& os, const Point& p)
+	{
+		os << p.x() << ", " << p.y() << ", " << p.z() << ", " << p.w();
+		return os;
+	};
 }
