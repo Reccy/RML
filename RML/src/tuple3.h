@@ -28,7 +28,7 @@ namespace RML
 		/// <summary>
 		/// Returns a const X component
 		/// </summary>
-		T x() const
+		inline T x() const
 		{
 			return this->m_x;
 		};
@@ -36,7 +36,7 @@ namespace RML
 		/// <summary>
 		/// Returns a const Y component
 		/// </summary>
-		T y() const
+		inline T y() const
 		{
 			return this->m_y;
 		};
@@ -44,7 +44,7 @@ namespace RML
 		/// <summary>
 		/// Returns a const Z component
 		/// </summary>
-		T z() const
+		inline T z() const
 		{
 			return this->m_z;
 		};

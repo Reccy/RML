@@ -17,27 +17,27 @@ namespace RML
 
 	TEST(RML_Transform, inverse_point)
 	{
-		Transform transform = Transform()
+		auto matrix = Transform()
 			.translate(5, -3, 2)
-			.invert();
+			.get_inverted();
 		Point point = Point(-3, 4, 5);
 
 		Point expectedResult = Point(-8, 7, 3);
 
-		EXPECT_EQ(transform * point, expectedResult);
+		EXPECT_EQ(matrix * point, expectedResult);
 	}
 
 	TEST(RML_Transform, transpose)
 	{
-		Transform transform = Transform()
-			.shear(1, 0, 0, 1, 2, 3)
-			.transpose();
+		auto transposed = Transform()
+			.rotate(90, 0, 0)
+			.get_transposed();
 
-		Point point = Point(0, 1, 0);
+		auto inverted = Transform()
+			.rotate(90, 0, 0)
+			.get_inverted();
 
-		Point expectedResult = Point(0, 1, 1);
-
-		EXPECT_EQ(transform * point, expectedResult);
+		EXPECT_EQ(transposed, inverted);
 	}
 
 	TEST(RML_Transform, translate_vector)
@@ -73,15 +73,15 @@ namespace RML
 
 	TEST(RML_Transform, scale_inverse)
 	{
-		Transform transform = Transform()
+		auto matrix = Transform()
 			.scale(2, 3, 4)
-			.invert();
+			.get_inverted();
 
 		Vector vector = Vector(-4, 6, 8);
 
 		Vector expectedResult = Vector(-2, 2, 2);
 
-		EXPECT_EQ(transform * vector, expectedResult);
+		EXPECT_EQ(matrix * vector, expectedResult);
 	}
 
 	TEST(RML_Transform, scale_is_reflection)
@@ -128,15 +128,15 @@ namespace RML
 	{
 		double rotationAmount = Trig::radians_to_degrees(Trig::PI / 4);
 
-		Transform transform = Transform()
+		auto matrix = Transform()
 			.rotate(rotationAmount, 0, 0)
-			.invert();
+			.get_inverted();
 
 		Point point = Point(0, 1, 0);
 
 		Point expectedResult = Point(0, sqrt(2) / 2, -(sqrt(2) / 2));
 
-		EXPECT_EQ(transform * point, expectedResult);
+		EXPECT_EQ(matrix * point, expectedResult);
 	}
 
 	TEST(RML_Transform, rotate_around_y_half_quarter)
@@ -171,15 +171,15 @@ namespace RML
 	{
 		double rotationAmount = Trig::radians_to_degrees(Trig::PI / 4);
 
-		Transform transform = Transform()
+		auto matrix = Transform()
 			.rotate(0, rotationAmount, 0)
-			.invert();
+			.get_inverted();
 
 		Point point = Point(0, 0, 1);
 
 		Point expectedResult = Point(-(sqrt(2) / 2), 0, sqrt(2) / 2);
 
-		EXPECT_EQ(transform * point, expectedResult);
+		EXPECT_EQ(matrix * point, expectedResult);
 	}
 
 	TEST(RML_Transform, rotate_around_z_half_quarter)
@@ -237,78 +237,6 @@ namespace RML
 		Point point = Point(0, 1, 0);
 
 		EXPECT_EQ(transformA * point, transformB * point);
-	}
-
-	TEST(RML_Transform, shear_moves_x_in_proportion_to_y)
-	{
-		Transform transform = Transform()
-			.shear(1, 0, 0, 0, 0, 0);
-
-		Point point = Point(2, 3, 4);
-
-		Point expectedResult = Point(5, 3, 4);
-
-		EXPECT_EQ(transform * point, expectedResult);
-	}
-
-	TEST(RML_Transform, shear_moves_x_in_proportion_to_z)
-	{
-		Transform transform = Transform()
-			.shear(0, 1, 0, 0, 0, 0);
-
-		Point point = Point(2, 3, 4);
-
-		Point expectedResult = Point(6, 3, 4);
-
-		EXPECT_EQ(transform * point, expectedResult);
-	}
-
-	TEST(RML_Transform, shear_moves_y_in_proportion_to_x)
-	{
-		Transform transform = Transform()
-			.shear(0, 0, 1, 0, 0, 0);
-
-		Point point = Point(2, 3, 4);
-
-		Point expectedResult = Point(2, 5, 4);
-
-		EXPECT_EQ(transform * point, expectedResult);
-	}
-
-	TEST(RML_Transform, shear_moves_y_in_proportion_to_z)
-	{
-		Transform transform = Transform()
-			.shear(0, 0, 0, 1, 0, 0);
-
-		Point point = Point(2, 3, 4);
-
-		Point expectedResult = Point(2, 7, 4);
-
-		EXPECT_EQ(transform * point, expectedResult);
-	}
-
-	TEST(RML_Transform, shear_moves_z_in_proportion_to_x)
-	{
-		Transform transform = Transform()
-			.shear(0, 0, 0, 0, 1, 0);
-
-		Point point = Point(2, 3, 4);
-
-		Point expectedResult = Point(2, 3, 6);
-
-		EXPECT_EQ(transform * point, expectedResult);
-	}
-
-	TEST(RML_Transform, shear_moves_z_in_proportion_to_y)
-	{
-		Transform transform = Transform()
-			.shear(0, 0, 0, 0, 0, 1);
-
-		Point point = Point(2, 3, 4);
-
-		Point expectedResult = Point(2, 3, 7);
-
-		EXPECT_EQ(transform * point, expectedResult);
 	}
 
 	TEST(RML_Transform, individual_transformations_are_applied_in_sequence)
@@ -387,33 +315,6 @@ namespace RML
 		EXPECT_TRUE(originalMatrix != newMatrix);
 	}
 
-	TEST(RML_Transform, shear_mutates_original)
-	{
-		Transform transform = Transform();
-
-		auto originalMatrix = transform.matrix();
-
-		transform.shear(1, 2, 3, 1, 2, 3);
-
-		auto newMatrix = transform.matrix();
-
-		EXPECT_TRUE(originalMatrix != newMatrix);
-	}
-
-	TEST(RML_Transform, invert_mutates_original)
-	{
-		Transform transform = Transform()
-			.translate(1, 0, 0);
-
-		auto originalMatrix = transform.matrix();
-
-		transform.invert();
-
-		auto newMatrix = transform.matrix();
-
-		EXPECT_TRUE(originalMatrix != newMatrix);
-	}
-
 	TEST(RML_Transform, read_matrix)
 	{
 		Transform original = Transform()
@@ -433,15 +334,11 @@ namespace RML
 	{
 		Transform a = Transform()
 			.scale(1, 2, 3)
-			.rotate(1, 2, 3)
-			.invert()
-			.shear(1, 2, 3, 1, 2, 3);
+			.rotate(1, 2, 3);
 
 		Transform b = Transform()
 			.scale(1, 2, 3)
-			.rotate(1, 2, 3)
-			.invert()
-			.shear(1, 2, 3, 1, 2, 3);
+			.rotate(1, 2, 3);
 
 		EXPECT_TRUE(a == b);
 	}
@@ -450,15 +347,11 @@ namespace RML
 	{
 		Transform a = Transform()
 			.scale(1, 2, 3)
-			.rotate(1, 2, 3)
-			.invert()
-			.shear(1, 2, 3, 1, 2, 3);
+			.rotate(1, 2, 3);
 
 		Transform b = Transform()
-			.scale(1, 2, 3)
-			.rotate(1, 2, 3)
-			.shear(1, 2, 3, 1, 2, 3)
-			.invert();
+			.scale(3, 2, 1)
+			.rotate(1, 2, 3);
 
 		EXPECT_TRUE(a != b);
 	}

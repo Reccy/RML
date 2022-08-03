@@ -4,37 +4,22 @@
 
 namespace RML
 {
-	Transform::Transform() : m_matrix(Matrix<double, 4, 4>::identity()) {};
+	Transform::Transform() :
+		m_translation(),
+		m_rotation(Matrix<double, 4, 4>::identity()),
+		m_scale(1, 1, 1) {};
 
 	Transform& Transform::translate(const double x, const double y, const double z)
 	{
-		Matrix<double, 4, 4> translationMatrix = Matrix<double, 4, 4>::identity();
-		translationMatrix(0, 3) = x;
-		translationMatrix(1, 3) = y;
-		translationMatrix(2, 3) = z;
-
-		m_matrix = translationMatrix * m_matrix;
-
+		m_translation += {x, y, z};
 		return *this;
 	}
 
-	Transform& Transform::scale(const double x, const double y, const double z)
+	Transform& Transform::rotate(const double xDeg, const double yDeg, const double zDeg)
 	{
-		Matrix<double, 4, 4> scaleMatrix = Matrix<double, 4, 4>::identity();
-		scaleMatrix(0, 0) = x;
-		scaleMatrix(1, 1) = y;
-		scaleMatrix(2, 2) = z;
-
-		m_matrix = scaleMatrix * m_matrix;
-
-		return *this;
-	}
-
-	Transform& Transform::rotate(const double x, const double y, const double z)
-	{
-		const double xRad = Trig::degrees_to_radians(x);
-		const double yRad = Trig::degrees_to_radians(y);
-		const double zRad = Trig::degrees_to_radians(z);
+		const double xRad = Trig::degrees_to_radians(xDeg);
+		const double yRad = Trig::degrees_to_radians(yDeg);
+		const double zRad = Trig::degrees_to_radians(zDeg);
 
 		Matrix<double, 4, 4> xRotationMatrix = Matrix<double, 4, 4>({
 			1, 0, 0, 0,
@@ -57,55 +42,57 @@ namespace RML
 			0, 0, 0, 1
 			});
 
-		m_matrix = zRotationMatrix * yRotationMatrix * xRotationMatrix * m_matrix;
+		m_rotation = zRotationMatrix * yRotationMatrix * xRotationMatrix * m_rotation;
 
 		return *this;
 	}
 
-	Transform& Transform::shear(const double xY, const double xZ, const double yX, const double yZ, const double zX, const double zY)
+	Transform& Transform::scale(const double x, const double y, const double z)
 	{
-		Matrix<double, 4, 4> shearMatrix = Matrix<double, 4, 4>({
-			1, xY, xZ, 0,
-			yX, 1, yZ, 0,
-			zX, zY, 1, 0,
-			0, 0, 0, 1
-			});
-
-		m_matrix = shearMatrix * m_matrix;
-
+		m_scale = { x * m_scale.x(), y * m_scale.y(), z * m_scale.z() };
 		return *this;
 	}
 
-	Transform& Transform::transpose()
+	const Matrix<double, 4, 4> Transform::get_transposed()
 	{
-		m_matrix = m_matrix.transpose();
-
-		return *this;
+		return matrix().transpose();
 	}
 
-	Transform& Transform::invert()
+	const Matrix<double, 4, 4> Transform::get_inverted()
 	{
-		if (m_matrix.invertible())
-		{
-			m_matrix = m_matrix.invert();
-		}
-
-		return *this;
+		return matrix().invert();
 	}
 
 	const Matrix<double, 4, 4> Transform::matrix() const
 	{
-		return m_matrix;
+		Matrix<double, 4, 4> tMatrix({
+			1, 0, 0, m_translation.x(),
+			0, 1, 0, m_translation.y(),
+			0, 0, 1, m_translation.z(),
+			0, 0, 0, 1
+		});
+
+		Matrix<double, 4, 4> rMatrix = m_rotation;
+
+		Matrix<double, 4, 4> sMatrix({
+			m_scale.x(), 0,           0,           0,
+			0,           m_scale.y(), 0,           0,
+			0,           0,           m_scale.z(), 0,
+			0,           0,           0,           1
+		});
+
+		auto result = tMatrix * rMatrix * sMatrix;
+		return result;
 	}
 
 	Tuple4<double> Transform::operator*(const Tuple4<double>& tuple) const
 	{
-		return m_matrix * tuple;
+		return matrix() * tuple;
 	}
 
 	bool Transform::operator==(const Transform& other) const
 	{
-		return m_matrix == other.m_matrix;
+		return matrix() == other.matrix();
 	}
 
 	bool Transform::operator!=(const Transform& other) const
