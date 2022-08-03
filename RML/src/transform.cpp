@@ -5,13 +5,13 @@
 namespace RML
 {
 	Transform::Transform() :
-		m_translation(),
-		m_rotation(Matrix<double, 4, 4>::identity()),
-		m_scale(1, 1, 1) {};
+		position(),
+		rotation(Matrix<double, 4, 4>::identity()),
+		scaling(1, 1, 1) {};
 
 	Transform& Transform::translate(const double x, const double y, const double z)
 	{
-		m_translation += {x, y, z};
+		position += {x, y, z};
 		return *this;
 	}
 
@@ -42,14 +42,14 @@ namespace RML
 			0, 0, 0, 1
 			});
 
-		m_rotation = zRotationMatrix * yRotationMatrix * xRotationMatrix * m_rotation;
+		rotation = zRotationMatrix * yRotationMatrix * xRotationMatrix * rotation;
 
 		return *this;
 	}
 
 	Transform& Transform::scale(const double x, const double y, const double z)
 	{
-		m_scale = { x * m_scale.x(), y * m_scale.y(), z * m_scale.z() };
+		scaling = { x * scaling.x(), y * scaling.y(), z * scaling.z() };
 		return *this;
 	}
 
@@ -66,18 +66,18 @@ namespace RML
 	const Matrix<double, 4, 4> Transform::matrix() const
 	{
 		Matrix<double, 4, 4> tMatrix({
-			1, 0, 0, m_translation.x(),
-			0, 1, 0, m_translation.y(),
-			0, 0, 1, m_translation.z(),
+			1, 0, 0, position.x(),
+			0, 1, 0, position.y(),
+			0, 0, 1, position.z(),
 			0, 0, 0, 1
 		});
 
-		Matrix<double, 4, 4> rMatrix = m_rotation;
+		Matrix<double, 4, 4> rMatrix = rotation;
 
 		Matrix<double, 4, 4> sMatrix({
-			m_scale.x(), 0,           0,           0,
-			0,           m_scale.y(), 0,           0,
-			0,           0,           m_scale.z(), 0,
+			scaling.x(), 0,           0,           0,
+			0,           scaling.y(), 0,           0,
+			0,           0,           scaling.z(), 0,
 			0,           0,           0,           1
 		});
 

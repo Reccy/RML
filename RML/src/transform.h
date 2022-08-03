@@ -71,9 +71,9 @@ namespace RML
 
 		bool operator==(const Transform& other) const;
 		bool operator!=(const Transform& other) const;
-	private:
-		Tuple3<double> m_translation;
-		Matrix<double, 4, 4> m_rotation;
-		Tuple3<double> m_scale;
+	public:
+		Tuple3<double> position;
+		Matrix<double, 4, 4> rotation;
+		Tuple3<double> scaling;
 	};
 }
