@@ -6,29 +6,29 @@ namespace RML
 
 	Vector::Vector(const Tuple4 tuple) : Tuple4(tuple.x(), tuple.y(), tuple.z(), 0) {};
 
+	Vector::Vector(const Tuple3<double> tuple) : Tuple4(tuple.x(), tuple.y(), tuple.z(), 0) {}
+
 	Vector::Vector(const double x, const double y, const double z) : Tuple4(x, y, z, 0) {};
 
 	Vector::Vector(const double x, const double y) : Tuple4(x, y, 0, 0) {};
 
-	Vector Vector::zero()
-	{
-		return Vector(0, 0, 0);
-	}
+	Vector::operator Tuple3<double>() { return { m_x, m_y, m_z }; }
 
-	Vector Vector::up()
-	{
-		return Vector(0, 1, 0);
-	}
+	Vector Vector::zero() { return { 0, 0, 0 }; }
 
-	Vector Vector::right()
-	{
-		return Vector(1, 0, 0);
-	}
+	Vector Vector::one() { return { 1, 1, 1 }; }
 
-	Vector Vector::forward()
-	{
-		return Vector(0, 0, 1);
-	}
+	Vector Vector::up() { return { 0, 1, 0 }; }
+
+	Vector Vector::down() { return { 0, -1, 0 }; }
+
+	Vector Vector::right() { return { 1, 0, 0 }; }
+
+	Vector Vector::left() { return { -1, 0, 0 }; }
+
+	Vector Vector::forward() { return { 0, 0, 1 }; }
+
+	Vector Vector::backward() { return { 0, 0, -1 }; }
 
 	Vector Vector::cross(const Vector& a, const Vector& b)
 	{

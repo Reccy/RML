@@ -1,4 +1,5 @@
 #pragma once
+#include "matrix.h"
 #include "tuple3.h"
 #include "tuple4.h"
 #include "point.h"
@@ -12,6 +13,8 @@ namespace RML
 
 		static Quaternion identity();
 
+		static Quaternion euler_angles(double xDegrees, double yDegrees, double zDegrees);
+
 		static Quaternion angle_axis(double rotDegrees, Tuple3<double> axisNormal);
 
 		Quaternion normalized() const;
@@ -19,6 +22,8 @@ namespace RML
 		Quaternion& normalize();
 
 		Quaternion inverse() const;
+
+		Matrix<double, 4, 4> matrix() const;
 
 		double magnitude() const;
 	

@@ -35,6 +35,36 @@ namespace RML
 		EXPECT_EQ(q.k(), 0);
 	}
 
+	TEST(RML_Quaternion, euler_angles_i)
+	{
+		Quaternion q = Quaternion::euler_angles(90, 0, 0);
+
+		EXPECT_TRUE(abs(q.w() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.i() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.j() - 0) < EPSILON);
+		EXPECT_TRUE(abs(q.k() - 0) < EPSILON);
+	}
+
+	TEST(RML_Quaternion, euler_angles_j)
+	{
+		Quaternion q = Quaternion::euler_angles(0, 90, 0);
+
+		EXPECT_TRUE(abs(q.w() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.i() - 0) < EPSILON);
+		EXPECT_TRUE(abs(q.j() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.k() - 0) < EPSILON);
+	}
+
+	TEST(RML_Quaternion, euler_angles_k)
+	{
+		Quaternion q = Quaternion::euler_angles(0, 0, 90);
+
+		EXPECT_TRUE(abs(q.w() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.i() - 0) < EPSILON);
+		EXPECT_TRUE(abs(q.j() - 0) < EPSILON);
+		EXPECT_TRUE(abs(q.k() - 0.707107) < EPSILON);
+	}
+
 	TEST(RML_Quaternion, angle_axis)
 	{
 		Quaternion q = Quaternion::angle_axis(90, { 1, 0, 0 });
@@ -65,6 +95,31 @@ namespace RML
 		Quaternion expectedResult(1/sqrt(2), 0, 1/sqrt(2), 0);
 
 		EXPECT_EQ(q, expectedResult);
+	}
+
+	TEST(RML_Quaternion, matrix_identity)
+	{
+		Quaternion q = Quaternion::identity();
+
+		Matrix<double, 4, 4> result = q.matrix();
+		Matrix<double, 4, 4> expectedResult = Matrix<double, 4, 4>::identity();
+
+		EXPECT_EQ(result, expectedResult);
+	}
+
+	TEST(RML_Quaternion, matrix_euler)
+	{
+		Quaternion q = Quaternion::euler_angles(90, 0, 0);
+
+		Matrix<double, 4, 4> result = q.matrix();
+		Matrix<double, 4, 4> expectedResult = Matrix<double, 4, 4>({
+			1, 0, 0, 0,
+			0, 0, -1, 0,
+			0, 1, 0, 0,
+			0, 0, 0, 1
+		});
+
+		EXPECT_EQ(result, expectedResult);
 	}
 
 	TEST(RML_Quaternion, multiply_with_tuple_test_1)

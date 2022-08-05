@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tuple4.h"
+#include "tuple3.h"
 
 namespace RML
 {
@@ -21,6 +22,15 @@ namespace RML
 		/// </summary>
 		/// <param name="tuple">The tuple to convert to a Vector</param>
 		Vector(const Tuple4 tuple);
+
+		/// <summary>
+		/// Constructs a Vector from a tuple, by copying x, y and z components.
+		/// </summary>
+		/// <param name="tuple">The tuple to convert to a Vector</param>
+		Vector(const Tuple3<double> tuple);
+
+		// Allows implicit conversion of Vector to Tuple3
+		operator Tuple3<double>();
 
 		/// <summary>
 		/// Constructs a Vector with x, y and z components
@@ -44,10 +54,22 @@ namespace RML
 		static Vector zero();
 
 		/// <summary>
+		/// Creates a vector where all components are 1
+		/// </summary>
+		/// <returns>One Vector</returns>
+		static Vector one();
+
+		/// <summary>
 		/// Creates a vector pointing up along the y axis
 		/// </summary>
 		/// <returns>Vector pointing up</returns>
 		static Vector up();
+
+		/// <summary>
+		/// Creates a vector pointing up along the -y axis
+		/// </summary>
+		/// <returns>Vector pointing down</returns>
+		static Vector down();
 
 		/// <summary>
 		/// Creates a vector pointing right along the x axis
@@ -56,10 +78,22 @@ namespace RML
 		static Vector right();
 
 		/// <summary>
+		/// Creates a vector pointing right along the -x axis
+		/// </summary>
+		/// <returns>Vector pointing left</returns>
+		static Vector left();
+
+		/// <summary>
 		/// Creates a vector pointing forward along the z axis
 		/// </summary>
 		/// <returns>Vector pointing forward</returns>
 		static Vector forward();
+
+		/// <summary>
+		/// Creates a vector pointing forward along the -z axis
+		/// </summary>
+		/// <returns>Vector pointing backward</returns>
+		static Vector backward();
 
 		/// <summary>
 		/// Performs a cross product operation and returns the result

@@ -15,6 +15,29 @@ namespace RML
 		return Quaternion(1, 0, 0, 0);
 	}
 
+	Quaternion Quaternion::euler_angles(double xDegrees, double yDegrees, double zDegrees)
+	{
+		double x = Trig::degrees_to_radians(xDegrees);
+		double y = Trig::degrees_to_radians(yDegrees);
+		double z = Trig::degrees_to_radians(zDegrees);
+
+		double cx = cos(x * 0.5);
+		double sx = sin(x * 0.5);
+
+		double cy = cos(y * 0.5);
+		double sy = sin(y * 0.5);
+
+		double cz = cos(z * 0.5);
+		double sz = sin(z * 0.5);
+
+		double w = cx * cy * cz + sx * sy * sz;
+		double i = sx * cy * cz - cx * sy * sz;
+		double j = cx * sy * cz + sx * cy * sz;
+		double k = cx * cy * sz - sx * sy * cz;
+
+		return { w, i, j, k };
+	}
+
 	Quaternion Quaternion::angle_axis(double rotDegrees, Tuple3<double> axisNormal)
 	{
 		double d = Trig::degrees_to_radians(rotDegrees);
@@ -57,6 +80,26 @@ namespace RML
 		result.m_k = -result.m_k;
 
 		return result;
+	}
+
+	Matrix<double, 4, 4> Quaternion::matrix() const
+	{
+		double a = 1 - 2 * (pow(m_j, 2) + pow(m_k, 2));
+		double b = 2 * (m_i * m_j - m_k * m_w);
+		double c = 2 * (m_i * m_k + m_j * m_w);
+		double d = 2 * (m_i * m_j + m_k * m_w);
+		double e = 1 - 2 * (pow(m_i, 2) + pow(m_k, 2));
+		double f = 2 * (m_j * m_k - m_i * m_w);
+		double g = 2 * (m_i * m_k - m_j * m_w);
+		double h = 2 * (m_j * m_k + m_i * m_w);
+		double i = 1 - 2 * (pow(m_i, 2) + pow(m_j, 2));
+
+		return {{
+			a, b, c, 0,
+			d, e, f, 0,
+			g, h, i, 0,
+			0 ,0, 0, 1
+		}};
 	}
 
 	double Quaternion::magnitude() const

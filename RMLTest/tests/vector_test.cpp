@@ -21,12 +21,32 @@ namespace RML
 		EXPECT_EQ(vector, expectedResult);
 	}
 
-	TEST(RML_Vector, construct_from_tuple)
+	TEST(RML_Vector, construct_from_tuple2)
 	{
 		Tuple4<double> tuple(1, 2, 3, 4);
 		Vector vector(tuple);
 
 		Vector expectedResult(1, 2, 3);
+
+		EXPECT_EQ(vector, expectedResult);
+	}
+
+	TEST(RML_Vector, construct_from_tuple3)
+	{
+		Tuple3<double> tuple(1, 2, 3);
+		Vector vector(tuple);
+
+		Vector expectedResult(1, 2, 3);
+
+		EXPECT_EQ(vector, expectedResult);
+	}
+
+	TEST(RML_Vector, implicit_tuple3)
+	{
+		Vector vector(1, 2, 3);
+		Tuple3<double> tuple(vector);
+
+		Vector expectedResult(tuple);
 
 		EXPECT_EQ(vector, expectedResult);
 	}

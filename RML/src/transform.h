@@ -3,6 +3,7 @@
 #include <stack>
 #include "matrix.h"
 #include "tuple3.h"
+#include "quaternion.h"
 
 namespace RML
 {
@@ -73,7 +74,7 @@ namespace RML
 		bool operator!=(const Transform& other) const;
 	public:
 		Tuple3<double> position;
-		Matrix<double, 4, 4> rotation;
+		Quaternion rotation;
 		Tuple3<double> scaling;
 	};
 }
