@@ -53,6 +53,23 @@ namespace RML
 		return result.normalized();
 	}
 
+	Quaternion Quaternion::from_to(const Vector& fromDirection, const Vector& toDirection)
+	{
+		RML::Vector axis = RML::Vector::cross(fromDirection, toDirection);
+		double angle = RML::Vector::angle(fromDirection, toDirection);
+		
+		if (angle <= EPSILON || angle >= 180 - EPSILON)
+		{
+			RML::Vector r = RML::Vector::cross(fromDirection, RML::Vector::right());
+			axis = RML::Vector::cross(r, fromDirection);
+
+			if (axis.magnitude() < EPSILON)
+				axis = RML::Vector::up();
+		}
+		
+		return Quaternion::angle_axis(angle, axis.normalized());
+	}
+
 	Quaternion Quaternion::normalized() const
 	{
 		Quaternion copy(*this);

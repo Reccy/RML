@@ -4,6 +4,8 @@
 #include "tuple4.h"
 #include "point.h"
 
+// Some code adapted from: https://gist.github.com/aeroson/043001ca12fe29ee911e
+
 namespace RML
 {
 	class Quaternion
@@ -16,6 +18,8 @@ namespace RML
 		static Quaternion euler_angles(double xDegrees, double yDegrees, double zDegrees);
 
 		static Quaternion angle_axis(double rotDegrees, Tuple3<double> axisNormal);
+
+		static Quaternion from_to(const Vector& fromDirection, const Vector& toDirection);
 
 		Quaternion normalized() const;
 

@@ -150,6 +150,39 @@ namespace RML
 		EXPECT_EQ(actual, expectedResult);
 	}
 
+	TEST(RML_Vector, angle)
+	{
+		Vector vectorA(1, 0, 0);
+		Vector vectorB(0, 1, 0);
+
+		double actual = Vector::angle(vectorA, vectorB);
+		double expectedResult = 90;
+
+		EXPECT_EQ(actual, expectedResult);
+	}
+
+	TEST(RML_Vector, angle_same)
+	{
+		Vector vectorA(1, 0, 0);
+		Vector vectorB(1, 0, 0);
+
+		double actual = Vector::angle(vectorA, vectorB);
+		double expectedResult = 0;
+
+		EXPECT_EQ(actual, expectedResult);
+	}
+
+	TEST(RML_Vector, angle_180)
+	{
+		Vector vectorA(1, 0, 0);
+		Vector vectorB(-1, 0, 0);
+
+		double actual = Vector::angle(vectorA, vectorB);
+		double expectedResult = 180;
+
+		EXPECT_EQ(actual, expectedResult);
+	}
+
 	TEST(RML_Vector, vector_reflection_at_45_degrees)
 	{
 		Vector vector(1, -1, 0);

@@ -112,6 +112,14 @@ namespace RML
 		static double dot(const Vector& a, const Vector& b);
 
 		/// <summary>
+		/// Calculates the angle between two normalized vectors
+		/// </summary>
+		/// <param name="a">The first vector</param>
+		/// <param name="b">The second vector</param>
+		/// <returns>Angle in degrees</returns>
+		static double angle(const Vector& a, const Vector& b);
+
+		/// <summary>
 		/// Reflects the vector off the normal
 		/// </summary>
 		/// <param name="vector">The vector to reflect</param>
@@ -129,6 +137,13 @@ namespace RML
 		/// Calculates and returns a normalized version of the vector
 		/// </summary>
 		/// <returns>Normalized vector</returns>
-		Vector normalize() const;
+		Vector normalize();
+
+		/// <summary>
+		/// Calculates and returns a normalized version of the vector.
+		/// Mutates the vector.
+		/// </summary>
+		/// <returns>Normalized vector</returns>
+		Vector normalized() const;
 	};
 }

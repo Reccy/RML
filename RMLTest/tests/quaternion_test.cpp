@@ -75,6 +75,19 @@ namespace RML
 		EXPECT_TRUE(abs(q.k() - 0) < EPSILON);
 	}
 
+	TEST(RML_Quaternion, from_to)
+	{
+		Vector forward = Vector::forward();
+		Vector right = Vector::right();
+
+		Quaternion q = Quaternion::from_to(forward, right);
+
+		EXPECT_TRUE(abs(q.w() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.i() - 0) < EPSILON);
+		EXPECT_TRUE(abs(q.j() - 0.707107) < EPSILON);
+		EXPECT_TRUE(abs(q.k() - 0) < EPSILON);
+	}
+
 	TEST(RML_Quaternion, normalized)
 	{
 		Quaternion q(25, 25, 25, 25);

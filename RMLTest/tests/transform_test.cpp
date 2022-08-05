@@ -239,6 +239,17 @@ namespace RML
 		EXPECT_EQ(transformA * point, transformB * point);
 	}
 
+	TEST(RML_Transform, look_at)
+	{
+		Transform t;
+
+		t.look_at({ 1,0,0 });
+
+		Quaternion expectedRotation = Quaternion::euler_angles(0, 90, 0);
+
+		EXPECT_EQ(t.rotation, expectedRotation);
+	}
+
 	TEST(RML_Transform, individual_transformations_are_applied_in_sequence)
 	{
 		Point point = Point(1, 0, 1);

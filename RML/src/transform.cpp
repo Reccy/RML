@@ -9,9 +9,16 @@ namespace RML
 		rotation(Quaternion::identity()),
 		scaling(1, 1, 1) {};
 
+	Vector Transform::up() const { return rotation * Vector::up(); }
+	Vector Transform::down() const { return rotation * Vector::down(); }
+	Vector Transform::left() const { return rotation * Vector::left(); }
+	Vector Transform::right() const { return rotation * Vector::right(); }
+	Vector Transform::forward() const { return rotation * Vector::forward(); }
+	Vector Transform::backward() const { return rotation * Vector::backward(); }
+
 	Transform& Transform::translate(const double x, const double y, const double z)
 	{
-		position += {x, y, z};
+		position = Tuple3<double>(position) + Tuple3<double>(x, y, z);
 		return *this;
 	}
 
@@ -25,6 +32,22 @@ namespace RML
 	{
 		scaling = { x * scaling.x(), y * scaling.y(), z * scaling.z() };
 		return *this;
+	}
+
+	void Transform::look_at(RML::Point target)
+	{
+		look_at(target, RML::Vector::forward());
+	}
+
+	void Transform::look_at(RML::Point target, RML::Vector up)
+	{
+		RML::Vector dirToTarget = RML::Vector(target - position).normalized();
+
+		RML::Quaternion fromToRot = RML::Quaternion::from_to(up, dirToTarget);
+
+		RML::Vector actualVec = fromToRot * RML::Vector::forward();
+
+		rotation = fromToRot;
 	}
 
 	const Matrix<double, 4, 4> Transform::get_transposed()

@@ -18,6 +18,13 @@ namespace RML
 		/// </summary>
 		Transform();
 
+		Vector up() const;
+		Vector down() const;
+		Vector left() const;
+		Vector right() const;
+		Vector forward() const;
+		Vector backward() const;
+
 		/// <summary>
 		/// Translates the Transform along x, y, z co-ordinates
 		/// </summary>
@@ -44,6 +51,19 @@ namespace RML
 		/// <param name="z">Rotate around the Z axis in degrees</param>
 		/// <returns>The Transform after being rotated</returns>
 		Transform& rotate(const double xDeg, const double yDeg, const double zDeg);
+
+		/// <summary>
+		/// Rotates the transform so that its forward vector points at the target
+		/// </summary>
+		/// <param name="target">Position of the target</param>
+		void look_at(RML::Point target);
+
+		/// <summary>
+		/// Rotates the transform so that its forward vector points at the target
+		/// </summary>
+		/// <param name="target">Position of the target</param>
+		/// <param name="forward">Forward direction vector</param>
+		void look_at(RML::Point target, RML::Vector forward);
 
 		/// <summary>
 		/// Transposes the matrix
@@ -73,8 +93,8 @@ namespace RML
 		bool operator==(const Transform& other) const;
 		bool operator!=(const Transform& other) const;
 	public:
-		Tuple3<double> position;
+		Vector position;
 		Quaternion rotation;
-		Tuple3<double> scaling;
+		Vector scaling;
 	};
 }

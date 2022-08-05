@@ -1,4 +1,6 @@
 #include "vector.h"
+#include "trig.h"
+#include <cmath>
 
 namespace RML
 {
@@ -46,6 +48,13 @@ namespace RML
 			a.m_z * b.m_z;
 	}
 
+	double Vector::angle(const Vector& a, const Vector& b)
+	{
+		return Trig::radians_to_degrees(
+			acos(dot(a, b) / (a.magnitude() * b.magnitude()))
+		);
+	}
+
 	Vector Vector::reflect(const Vector& vector, const Vector& normal)
 	{
 		return vector - normal * 2 * dot(vector, normal);
@@ -60,7 +69,13 @@ namespace RML
 		);
 	}
 
-	Vector Vector::normalize() const
+	Vector Vector::normalize()
+	{
+		*this = normalized();
+		return *this;
+	}
+
+	Vector Vector::normalized() const
 	{
 		return Vector(*this / this->magnitude());
 	}
