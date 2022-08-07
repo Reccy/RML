@@ -73,14 +73,14 @@ namespace RML
 		/// <summary>
 		/// Transposes the matrix
 		/// </summary>
-		/// <returns>The Transform after being transposed</returns>
-		const Matrix<double, 4, 4> get_transposed();
+		/// <returns>The Matrix after being transposed</returns>
+		const Matrix<double, 4, 4> get_transposed() const;
 
 		/// <summary>
 		/// Inverts the Transform
 		/// </summary>
-		/// <returns>The Transform after being inverted</returns>
-		const Matrix<double, 4, 4> get_inverted();
+		/// <returns>The Matrix after being inverted</returns>
+		const Matrix<double, 4, 4> get_inverted() const;
 
 		/// <summary>
 		/// Returns the transform as an actual matrix

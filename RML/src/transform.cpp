@@ -89,12 +89,12 @@ namespace RML
 		rotation = fromToRot;
 	}
 
-	const Matrix<double, 4, 4> Transform::get_transposed()
+	const Matrix<double, 4, 4> Transform::get_transposed() const
 	{
 		return matrix().transpose();
 	}
 
-	const Matrix<double, 4, 4> Transform::get_inverted()
+	const Matrix<double, 4, 4> Transform::get_inverted() const
 	{
 		return matrix().invert();
 	}
