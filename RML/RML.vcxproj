@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="RML.h" />
+    <ClInclude Include="src\comparison.h" />
     <ClInclude Include="src\constants.h" />
     <ClInclude Include="src\matrix.h" />
     <ClInclude Include="src\point.h" />

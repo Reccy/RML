@@ -48,6 +48,9 @@
     <ClInclude Include="src\quaternion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\comparison.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RML.cpp">

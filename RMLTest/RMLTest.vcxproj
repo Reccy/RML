@@ -44,6 +44,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="tests\comparison_test.cpp" />
     <ClCompile Include="tests\matrix_test.cpp" />
     <ClCompile Include="tests\point_test.cpp" />
     <ClCompile Include="tests\quaternion_test.cpp" />
