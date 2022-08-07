@@ -3,6 +3,7 @@
 #include <array>
 #include <sstream>
 #include "tuple4.h"
+#include "comparison.h"
 
 namespace RML
 {
@@ -300,7 +301,7 @@ namespace RML
 
 			for (int i = 0; i < this->m_data.size(); ++i)
 			{
-				if (abs(this->m_data[i] - other.m_data[i]) > EPSILON)
+				if (!equal<T>(this->m_data[i], other.m_data[i]))
 				{
 					return false;
 				}

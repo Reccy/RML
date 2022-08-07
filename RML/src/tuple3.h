@@ -51,9 +51,9 @@ namespace RML
 
 		bool operator==(const Tuple3& other) const
 		{
-			return abs(m_x - other.m_x) < EPSILON &&
-				abs(m_y - other.m_y) < EPSILON &&
-				abs(m_z - other.m_z) < EPSILON;
+			return equal(m_x, other.m_x) &&
+				equal(m_y, other.m_y) &&
+				equal(m_z, other.m_z);
 		};
 
 		bool operator!=(const Tuple3& other) const
