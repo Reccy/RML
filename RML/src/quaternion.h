@@ -13,6 +13,8 @@ namespace RML
 	public:
 		Quaternion(double w, double i, double j, double k);
 
+		Quaternion(Matrix<double, 4, 4> matrix);
+
 		static Quaternion identity();
 
 		static Quaternion euler_angles(double xDegrees, double yDegrees, double zDegrees);

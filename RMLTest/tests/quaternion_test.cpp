@@ -13,6 +13,21 @@ namespace RML
 		EXPECT_EQ(q.k(), 4);
 	}
 
+	TEST(RML_Quaternion, construct_quaternion_from_matrix)
+	{
+		Transform t;
+		t.rotate(45, 45, 90);
+
+		Matrix<double, 4, 4> matrix = t.matrix();
+
+		Quaternion q(matrix);
+
+		auto result = q.matrix();
+		auto expectedResult = t.matrix();
+
+		EXPECT_EQ(result, expectedResult);
+	}
+
 	TEST(RML_Quaternion, invert)
 	{
 		Quaternion q(1, 2, 3, 4);

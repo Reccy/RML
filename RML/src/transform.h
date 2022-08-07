@@ -18,6 +18,11 @@ namespace RML
 		/// </summary>
 		Transform();
 
+		/// <summary>
+		/// Constructs a Transform from a matrix
+		/// </summary>
+		Transform(Matrix<double, 4, 4> matrix);
+
 		Vector up() const;
 		Vector down() const;
 		Vector left() const;

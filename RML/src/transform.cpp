@@ -9,6 +9,45 @@ namespace RML
 		rotation(Quaternion::identity()),
 		scaling(1, 1, 1) {};
 
+	Transform::Transform(Matrix<double, 4, 4> matrix) :
+		position(),
+		rotation(Quaternion::identity()),
+		scaling(1, 1, 1)
+	{
+		double posX = matrix(0, 3);
+		double posY = matrix(1, 3);
+		double posZ = matrix(2, 3);
+
+		position = Vector(posX, posY, posZ);
+
+		double scaleX = Vector(matrix(0,0), matrix(1,0), matrix(2,0)).magnitude();
+		double scaleY = Vector(matrix(0,1), matrix(1,1), matrix(2,1)).magnitude();
+		double scaleZ = Vector(matrix(0,2), matrix(1,2), matrix(2,2)).magnitude();
+
+		scaling = Vector(scaleX, scaleY, scaleZ);
+
+		double rotA = matrix(0,0) / scaleX;
+		double rotB = matrix(0,1) / scaleY;
+		double rotC = matrix(0,2) / scaleZ;
+
+		double rotD = matrix(1,0) / scaleX;
+		double rotE = matrix(1,1) / scaleY;
+		double rotF = matrix(1,2) / scaleZ;
+
+		double rotG = matrix(2,0) / scaleX;
+		double rotH = matrix(2,1) / scaleY;
+		double rotI = matrix(2,2) / scaleZ;
+
+		Matrix<double, 4, 4> rotMatrix({
+			rotA, rotB, rotC, 0,
+			rotD, rotE, rotF, 0,
+			rotG, rotH, rotI, 0,
+			0,    0,    0,    1
+		});
+
+		rotation = Quaternion(rotMatrix);
+	}
+
 	Vector Transform::up() const { return rotation * Vector::up(); }
 	Vector Transform::down() const { return rotation * Vector::down(); }
 	Vector Transform::left() const { return rotation * Vector::left(); }

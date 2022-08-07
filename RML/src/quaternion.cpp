@@ -10,6 +10,40 @@ namespace RML
 		  m_k(k)
 	{}
 
+	Quaternion::Quaternion(Matrix<double, 4, 4> matrix)
+		: m_w(0),
+		  m_i(0),
+		  m_j(0),
+		  m_k(0)
+	{
+		// Source: https://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/forum.htm
+
+		if ((matrix(0, 0) > matrix(1, 1)) && (matrix(0, 0) > matrix(2, 2)))
+		{
+			double s = sqrt(1.0 + matrix(0,0) - matrix(1,1) - matrix(2,2)) * 2;
+			m_i = 0.25 * s;
+			m_j = (matrix(0, 1) + matrix(1, 0)) / s;
+			m_k = (matrix(0, 2) - matrix(2, 0)) / s;
+			m_w = (matrix(1, 2) - matrix(2, 1)) / s;
+		}
+		else if (matrix(1, 1) > matrix(2, 2))
+		{
+			double s = sqrt(1.0 + matrix(1, 1) - matrix(0, 0) - matrix(2, 2)) * 2;
+			m_i = (matrix(0, 1) + matrix(1, 0)) / s;
+			m_j = 0.25 * s;
+			m_k = (matrix(1, 2) + matrix(2, 1)) / s;
+			m_w = (matrix(0, 2) - matrix(2, 0)) / s;
+		}
+		else
+		{
+			double s = sqrt(1.0 + matrix(2, 2) - matrix(0, 0) - matrix(1, 1)) * 2;
+			m_i = (matrix(0, 2) + matrix(2, 0)) / s;
+			m_j = (matrix(1, 2) + matrix(2, 1)) / s;
+			m_k = 0.25 * s;
+			m_w = (matrix(0, 1) - matrix(1, 0)) / s;
+		}
+	}
+
 	Quaternion Quaternion::identity()
 	{
 		return Quaternion(1, 0, 0, 0);

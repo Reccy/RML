@@ -4,6 +4,22 @@
 
 namespace RML
 {
+	TEST(RML_Transform, construct_from_matrix)
+	{
+		Transform transform;
+		transform.translate(10, 5, -5);
+		transform.rotate(120, 50, 90);
+		transform.scale(10, 5, 1.2);
+
+		auto expectedResult = transform.matrix();
+
+		Transform resultTransform(expectedResult);
+
+		auto result = resultTransform.matrix();
+
+		EXPECT_EQ(expectedResult, result);
+	}
+
 	TEST(RML_Transform, translate_point)
 	{
 		Transform transform = Transform()
