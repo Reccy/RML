@@ -77,6 +77,18 @@ namespace RML
 			return *this;
 		}
 
+		Tuple2 operator*(const Tuple2& other) const
+		{
+			return Tuple2(this->m_x * other.m_x, this->m_y * other.m_y);
+		}
+
+		Tuple2& operator*=(const Tuple2& other)
+		{
+			Tuple2 res = *this * other;
+			this = res;
+			return this;
+		}
+
 		Tuple2 operator-() const
 		{
 			return Tuple2(0, 0) - *this;
