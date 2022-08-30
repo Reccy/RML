@@ -89,6 +89,11 @@ namespace RML
 		rotation = fromToRot;
 	}
 
+	void Transform::rotate_around(RML::Vector origin, RML::Vector axisDirection, double angleDegrees)
+	{
+		
+	}
+
 	const Matrix<double, 4, 4> Transform::get_transposed() const
 	{
 		return matrix().transpose();
