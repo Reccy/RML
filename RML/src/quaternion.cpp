@@ -170,10 +170,10 @@ namespace RML
 
 	Tuple4<double> Quaternion::operator*(const Tuple4<double>& t) const
 	{
-		Quaternion tq(t.w(), t.x(), t.y(), t.z());
-		Quaternion a = *this * tq;
-		Quaternion b = a * inverse();
-		return { b.i(), b.j(), b.k(), b.w() };
+		Quaternion p(t.w(), t.x(), t.y(), t.z());
+		Quaternion r = *this * p * inverse();
+
+		return { r.i(), r.j(), r.k(), r.w() };
 	}
 
 	Quaternion Quaternion::operator*(const Quaternion& other) const
