@@ -30,7 +30,7 @@ namespace RML
 		Vector(const Tuple3<double> tuple);
 
 		// Allows implicit conversion of Vector to Tuple3
-		operator Tuple3<double>();
+		operator Tuple3<double>() const;
 
 		/// <summary>
 		/// Constructs a Vector with x, y and z components
@@ -118,6 +118,15 @@ namespace RML
 		/// <param name="b">The second vector</param>
 		/// <returns>Angle in degrees</returns>
 		static double angle(const Vector& a, const Vector& b);
+
+		/// <summary>
+		/// Calculates the angle between two normalized vectors in relation to an axis
+		/// </summary>
+		/// <param name="a">The first vector</param>
+		/// <param name="b">The second vector</param>
+		/// <param name="axis">The axis</param>
+		/// <returns>Angle in degrees, signed</returns>
+		static double signed_angle(const Vector& a, const Vector& b, const Vector& axis);
 
 		/// <summary>
 		/// Reflects the vector off the normal

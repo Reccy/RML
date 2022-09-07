@@ -14,7 +14,7 @@ namespace RML
 
 	Vector::Vector(const double x, const double y) : Tuple4(x, y, 0, 0) {};
 
-	Vector::operator Tuple3<double>() { return { m_x, m_y, m_z }; }
+	Vector::operator Tuple3<double>() const { return { m_x, m_y, m_z }; }
 
 	Vector Vector::zero() { return { 0, 0, 0 }; }
 
@@ -53,6 +53,15 @@ namespace RML
 		return Trig::radians_to_degrees(
 			acos(dot(a, b) / (a.magnitude() * b.magnitude()))
 		);
+	}
+
+	double RML::Vector::signed_angle(const Vector& a, const Vector& b, const Vector& axis)
+	{
+		double unsignedAngle = angle(a, b);
+		
+		auto c = RML::Vector::cross(a, b);
+		double s = -copysign(1.0, axis.x() * c.x() + axis.y() * c.y() + axis.z() * c.z());
+		return s * unsignedAngle;
 	}
 
 	Vector Vector::reflect(const Vector& vector, const Vector& normal)
