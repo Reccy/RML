@@ -1,6 +1,8 @@
 #include "vector.h"
 #include "trig.h"
 #include <cmath>
+#include <string>
+#include <cassert>
 
 namespace RML
 {
@@ -51,17 +53,21 @@ namespace RML
 	double Vector::angle(const Vector& a, const Vector& b)
 	{
 		return Trig::radians_to_degrees(
-			acos(dot(a, b) / (a.magnitude() * b.magnitude()))
+			atan2(
+				cross(b, a).magnitude(),
+				dot(a, b)
+			)
 		);
 	}
 
 	double RML::Vector::signed_angle(const Vector& a, const Vector& b, const Vector& axis)
 	{
-		double unsignedAngle = angle(a, b);
-		
-		auto c = RML::Vector::cross(a, b);
-		double s = -copysign(1.0, axis.x() * c.x() + axis.y() * c.y() + axis.z() * c.z());
-		return s * unsignedAngle;
+		return Trig::radians_to_degrees(
+			atan2(
+				dot(cross(a, b), axis),
+				dot(a, b)
+			)
+		);
 	}
 
 	Vector Vector::reflect(const Vector& vector, const Vector& normal)
