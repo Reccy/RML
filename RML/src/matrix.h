@@ -214,7 +214,7 @@ namespace RML
 			if (!invertible())
 			{
 				std::cerr << "Matrix is not invertible" << std::endl;
-				return *m_inverted;
+				return *this;
 			}
 
 			Matrix<T, ROW, COL> result;

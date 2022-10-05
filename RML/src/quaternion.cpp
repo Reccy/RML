@@ -49,6 +49,7 @@ namespace RML
 		return Quaternion(1, 0, 0, 0);
 	}
 
+	// Source: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 	Quaternion Quaternion::euler_angles(double xDegrees, double yDegrees, double zDegrees)
 	{
 		double x = Trig::degrees_to_radians(xDegrees);
@@ -133,6 +134,37 @@ namespace RML
 		return result;
 	}
 
+	// Source: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+	Vector Quaternion::to_euler() const
+	{
+		RML::Vector eulerAngles;
+
+		double x, y, z;
+
+		// roll (x-axis rotation)
+		double sinr_cosp = 2 * (m_w * m_i + m_j * m_k);
+		double cosr_cosp = 1 - 2 * (m_w * m_i + m_j * m_k);
+		x = std::atan2(sinr_cosp, cosr_cosp);
+
+		// pitch (y-axis rotation)
+		double sinp = 2 * (m_w * m_j - m_k * m_i);
+		if (std::abs(sinp) >= 1)
+			y = std::copysign(RML::Trig::PI / 2, sinp); // use 90 degrees if out of range
+		else
+			y = std::asin(sinp);
+
+		// yaw (z-axis rotation)
+		double siny_cosp = 2 * (m_w * m_k + m_i * m_j);
+		double cosy_cosp = 1 - 2 * (m_j * m_j + m_k * m_k);
+		z = std::atan2(siny_cosp, cosy_cosp);
+
+		return {
+			Trig::radians_to_degrees(x),
+			Trig::radians_to_degrees(y),
+			Trig::radians_to_degrees(z)
+		};
+	}
+
 	Matrix<double, 4, 4> Quaternion::matrix() const
 	{
 		double a = 1 - 2 * (pow(m_j, 2) + pow(m_k, 2));
@@ -170,10 +202,10 @@ namespace RML
 
 	Tuple4<double> Quaternion::operator*(const Tuple4<double>& t) const
 	{
-		Quaternion tq(t.w(), t.x(), t.y(), t.z());
-		Quaternion a = *this * tq;
-		Quaternion b = a * inverse();
-		return { b.i(), b.j(), b.k(), b.w() };
+		Quaternion p(t.w(), t.x(), t.y(), t.z());
+		Quaternion r = *this * p * inverse();
+
+		return { r.i(), r.j(), r.k(), r.w() };
 	}
 
 	Quaternion Quaternion::operator*(const Quaternion& other) const

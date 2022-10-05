@@ -48,12 +48,12 @@ namespace RML
 		rotation = Quaternion(rotMatrix);
 	}
 
-	Vector Transform::up() const { return rotation * Vector::up(); }
-	Vector Transform::down() const { return rotation * Vector::down(); }
-	Vector Transform::left() const { return rotation * Vector::left(); }
-	Vector Transform::right() const { return rotation * Vector::right(); }
-	Vector Transform::forward() const { return rotation * Vector::forward(); }
-	Vector Transform::backward() const { return rotation * Vector::backward(); }
+	Vector Transform::up() const { return rotation.inverse() * Vector::up(); }
+	Vector Transform::down() const { return rotation.inverse() * Vector::down(); }
+	Vector Transform::left() const { return rotation.inverse() * Vector::left(); }
+	Vector Transform::right() const { return rotation.inverse() * Vector::right(); }
+	Vector Transform::forward() const { return rotation.inverse() * Vector::forward(); }
+	Vector Transform::backward() const { return rotation.inverse() * Vector::backward(); }
 
 	Transform& Transform::translate(const double x, const double y, const double z)
 	{
@@ -87,6 +87,11 @@ namespace RML
 		RML::Vector actualVec = fromToRot * RML::Vector::forward();
 
 		rotation = fromToRot;
+	}
+
+	void Transform::rotate_around(RML::Vector origin, RML::Vector axisDirection, double angleDegrees)
+	{
+		
 	}
 
 	const Matrix<double, 4, 4> Transform::get_transposed() const

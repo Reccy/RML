@@ -1,6 +1,8 @@
 #include "vector.h"
 #include "trig.h"
 #include <cmath>
+#include <string>
+#include <cassert>
 
 namespace RML
 {
@@ -14,7 +16,7 @@ namespace RML
 
 	Vector::Vector(const double x, const double y) : Tuple4(x, y, 0, 0) {};
 
-	Vector::operator Tuple3<double>() { return { m_x, m_y, m_z }; }
+	Vector::operator Tuple3<double>() const { return { m_x, m_y, m_z }; }
 
 	Vector Vector::zero() { return { 0, 0, 0 }; }
 
@@ -51,7 +53,20 @@ namespace RML
 	double Vector::angle(const Vector& a, const Vector& b)
 	{
 		return Trig::radians_to_degrees(
-			acos(dot(a, b) / (a.magnitude() * b.magnitude()))
+			atan2(
+				cross(b, a).magnitude(),
+				dot(a, b)
+			)
+		);
+	}
+
+	double RML::Vector::signed_angle(const Vector& a, const Vector& b, const Vector& axis)
+	{
+		return Trig::radians_to_degrees(
+			atan2(
+				dot(cross(a, b), axis),
+				dot(a, b)
+			)
 		);
 	}
 

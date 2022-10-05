@@ -34,6 +34,8 @@ namespace RML
 		Vector operator-(const Point& other) const;
 		Point operator-(const Vector& other) const;
 		Tuple4<double> operator-() const;
+
+		operator Tuple3<double>() const;
 	};
 
 	std::ostream& operator<<(std::ostream& os, const Point& p);

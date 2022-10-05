@@ -71,6 +71,14 @@ namespace RML
 		void look_at(RML::Point target, RML::Vector forward);
 
 		/// <summary>
+		/// Rotates the transform around the origin point. Modifies position and rotation.
+		/// </summary>
+		/// <param name="origin">The point to rotate around</param>
+		/// <param name="axisDirection">The direciton to rotate around</param>
+		/// <param name="angleDegrees">How much to rotate in degrees</param>
+		void rotate_around(RML::Vector origin, RML::Vector axisDirection, double angleDegrees);
+
+		/// <summary>
 		/// Transposes the matrix
 		/// </summary>
 		/// <returns>The Matrix after being transposed</returns>

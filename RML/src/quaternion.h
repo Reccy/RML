@@ -29,6 +29,8 @@ namespace RML
 
 		Quaternion inverse() const;
 
+		RML::Vector to_euler() const;
+
 		Matrix<double, 4, 4> matrix() const;
 
 		double magnitude() const;

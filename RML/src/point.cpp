@@ -23,6 +23,11 @@ namespace RML
 		return Tuple4::operator-();
 	}
 
+	Point::operator Tuple3<double>() const
+	{
+		return RML::Tuple3<double>(m_x, m_y, m_z);
+	}
+
 	std::ostream& operator<<(std::ostream& os, const Point& p)
 	{
 		os << p.x() << ", " << p.y() << ", " << p.z() << ", " << p.w();
