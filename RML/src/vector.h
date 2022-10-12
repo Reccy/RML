@@ -137,6 +137,11 @@ namespace RML
 		static Vector reflect(const Vector& vector, const Vector& normal);
 
 		/// <summary>
+		/// Projects vector p onto direction dir
+		/// </summary>
+		static Vector project(const Vector& p, const Vector& dir);
+
+		/// <summary>
 		/// Calculates and returns the magnitude of the vector
 		/// </summary>
 		/// <returns>Magnitude of the vector</returns>
@@ -154,5 +159,11 @@ namespace RML
 		/// </summary>
 		/// <returns>Normalized vector</returns>
 		Vector normalized() const;
+
+		/// <summary>
+		/// Any methods components close to 0 are set to 0.
+		/// </summary>
+		/// <returns>Copy of vector where close to 0 components are set to 0</returns>
+		Vector clear_near_zero() const;
 	};
 }

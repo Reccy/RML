@@ -1,5 +1,6 @@
 #include "vector.h"
 #include "trig.h"
+#include "comparison.h"
 #include <cmath>
 #include <string>
 #include <cassert>
@@ -75,6 +76,17 @@ namespace RML
 		return vector - normal * 2 * dot(vector, normal);
 	}
 
+	Vector Vector::project(const Vector& p, const Vector& dir)
+	{
+		Vector a = -dir;
+		Vector b = dir;
+
+		Vector ap = p - a;
+		Vector ab = b - a;
+
+		return a + ab * (dot(ap, ab) / dot(ab, ab));
+	}
+
 	double Vector::magnitude() const
 	{
 		return sqrt(
@@ -93,5 +105,14 @@ namespace RML
 	Vector Vector::normalized() const
 	{
 		return Vector(*this / this->magnitude());
+	}
+
+	Vector Vector::clear_near_zero() const
+	{
+		auto x = equal(m_x, 0.0) ? 0.0 : m_x;
+		auto y = equal(m_y, 0.0) ? 0.0 : m_y;
+		auto z = equal(m_z, 0.0) ? 0.0 : m_z;
+
+		return Vector(x, y, z);
 	}
 }
